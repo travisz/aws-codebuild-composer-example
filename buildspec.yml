@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - |
+          # Install Composer
+          echo "Installing Composer"
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php ;
+          php -r "unlink('composer-setup.php');" ;
+          mv composer.phar /usr/local/bin/composer
+  build:
+    commands:
+      - |
+          # Composer Install Deps
+          echo "Installing composer / application requirements"
+          composer install --no-progress --no-suggest
+artifacts:
+  files:
+    - '**/*'
